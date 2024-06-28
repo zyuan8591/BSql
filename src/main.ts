@@ -6,6 +6,7 @@ import App from './App.vue'
 import router from './router'
 
 import firebaseApp from '@/server/firebase/config'
+import 'nes.css/css/nes.min.css'
 import './assets/main.scss'
 
 const app = createApp(App)

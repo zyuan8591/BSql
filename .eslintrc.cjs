@@ -55,7 +55,9 @@ module.exports = {
         ],
         'newlines-between': 'always'
       }
-    ]
+    ],
+    // tailwind
+    'tailwindcss/no-custom-classname': 'off'
   },
   parserOptions: {
     ecmaVersion: 'latest'
