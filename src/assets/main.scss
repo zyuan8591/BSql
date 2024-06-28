@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url(./basic.scss);
+@import url(./shadcn.scss);
 
 body {
   @apply font-zpix text-white;

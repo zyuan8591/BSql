@@ -3,7 +3,7 @@ import Header from '@/components/templates/Header.vue'
 </script>
 
 <template>
-  <div class="min-h-screen bg-main_background pt-header">
+  <div class="min-h-screen pt-header">
     <Header />
     <RouterView />
   </div>
