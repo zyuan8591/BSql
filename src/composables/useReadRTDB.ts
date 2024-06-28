@@ -4,7 +4,7 @@ import { useDatabaseList } from 'vuefire'
 
 import { db } from '@/server/firebase/config'
 
-export default async function useRTDB<T>(route: string): Promise<{ data: T }> {
+export default async function useReadRTDB<T>(route: string): Promise<{ data: T }> {
   const response = useDatabaseList(dbRef(db, route))
 
   await nextTick()
