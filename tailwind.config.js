@@ -28,7 +28,7 @@ export default {
         zpix: ['zpix', 'sans-serif']
       },
       spacing: {
-        header: '50px'
+        header: 'var(--header-height)'
       },
       colors: {
         yellow: {

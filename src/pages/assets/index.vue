@@ -7,6 +7,16 @@ import getAssetsCurrency, { type Currency } from '@/server/api/getCurrencyType'
 const assetsType = ref<AssetType[]>([])
 const currencyType = ref<Currency[]>([])
 
+const assetList = ref([
+  {
+    id: 1,
+    assetsType: 2001,
+    currencyType: 1001,
+    initialAmount: 100000,
+    createDate: '2021-10-01'
+  }
+])
+
 onMounted(async () => {
   const res = await getAssetsType()
   assetsType.value = res.data
@@ -26,5 +36,4 @@ onMounted(async () => {
     <div>{{ c.symbol }}</div>
     <div>{{ c.value }}</div>
   </div>
-  <div>123</div>
 </template>
