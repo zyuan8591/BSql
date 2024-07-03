@@ -18,6 +18,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@line/liff": "^2.23.2",
     "@radix-icons/vue": "^1.0.0",
     "@vueuse/core": "^10.11.0",
     "class-variance-authority": "^0.7.0",
