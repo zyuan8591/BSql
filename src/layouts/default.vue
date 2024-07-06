@@ -3,7 +3,7 @@ import Header from '@/components/templates/Header.vue'
 </script>
 
 <template>
-  <div class="min-h-screen pt-header">
+  <div class="min-h-screen px-4 pt-[calc(var(--header-height)_+_10px)]">
     <Header />
     <RouterView />
   </div>
