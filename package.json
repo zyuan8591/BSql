@@ -26,6 +26,7 @@
     "firebase": "^10.12.2",
     "nes.css": "^2.3.0",
     "pinia": "^2.1.7",
+    "radash": "^12.1.0",
     "radix-vue": "^1.8.5",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
