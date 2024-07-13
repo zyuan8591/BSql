@@ -3,14 +3,14 @@ import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import CleanCss from 'vite-plugin-clean-css'
 import Pages from 'vite-plugin-pages'
-import vueDevTools from 'vite-plugin-vue-devtools'
+// import vueDevTools from 'vite-plugin-vue-devtools'
 import Layouts from 'vite-plugin-vue-layouts'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
-    vueDevTools(),
+    // vueDevTools(),
     Pages({
       importMode: 'async',
       dirs: [

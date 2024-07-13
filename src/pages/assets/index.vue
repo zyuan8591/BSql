@@ -1,8 +1,19 @@
 <script setup lang="ts">
+import { PlusIcon } from '@radix-icons/vue'
 import { storeToRefs } from 'pinia'
 import { onMounted, ref } from 'vue'
 
+import Button from '@/components/ui/button/Button.vue'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger
+} from '@/components/ui/drawer'
 import { Progress } from '@/components/ui/progress'
 import getAssetsList, { type Asset } from '@/server/api/getAssetsList'
 import getAssetsType, { type AssetType } from '@/server/api/getAssetsType'
@@ -32,14 +43,13 @@ const setData = async () => {
   try {
     const res = await getAssetsList(userInfo.value.userId)
     const totalAmount = res.reduce((acc, cur) => acc + cur.amount, 0)
-    console.log(res)
     data.value = res.map((a) => {
       return {
         ...a,
         assetTypeStr: assetsType.value.find((t) => t.id === a.assetType)?.name || '',
         currencyTypeStr: currencyType.value.find((t) => t.id === a.currencyType)?.symbol || '',
         isOpen: false,
-        percentage: totalAmount === 0 ? 0 : (a.amount / totalAmount) * 100
+        percentage: (a.amount / totalAmount) * 100 || 0
       }
     })
   } catch (e) {
@@ -77,5 +87,22 @@ onMounted(async () => {
         </div>
       </CollapsibleContent>
     </Collapsible>
+
+    <Drawer>
+      <DrawerTrigger
+        class="center fixed bottom-8 left-1/2 size-12 -translate-x-1/2 rounded-full border border-border"
+      >
+        <PlusIcon class="size-5" />
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>建立新帳戶資產</DrawerTitle>
+          <DrawerDescription>$＿$</DrawerDescription>
+        </DrawerHeader>
+        <DrawerFooter>
+          <Button>送出</Button>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
   </div>
 </template>
