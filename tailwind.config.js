@@ -34,6 +34,9 @@ export default {
         yellow: {
           DEFAULT: '#F8E71C'
         },
+        red: {
+          DEFAULT: '#E60012'
+        },
         border: 'var(--border)',
         input: 'var(--input)',
         ring: 'var(--ring)',

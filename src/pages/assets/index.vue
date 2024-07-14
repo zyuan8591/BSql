@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { PlusIcon } from '@radix-icons/vue'
 import { storeToRefs } from 'pinia'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
-import Button from '@/components/ui/button/Button.vue'
+import { Button } from '@/components/ui/button'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import {
   Drawer,
@@ -15,9 +15,9 @@ import {
   DrawerTrigger
 } from '@/components/ui/drawer'
 import { Progress } from '@/components/ui/progress'
-import getAssetsList, { type Asset } from '@/server/api/getAssetsList'
 import getAssetsType, { type AssetType } from '@/server/api/getAssetsType'
 import getAssetsCurrency, { type Currency } from '@/server/api/getCurrencyType'
+import useQueryAssetsList from '@/server/api/useQueryAssetsList'
 import { useAuthStore } from '@/store/auth'
 import num from '@/utils/num'
 
@@ -31,31 +31,24 @@ const additionInfo = {
   createDate: '建立日期'
 }
 
-interface AssetData extends Asset {
-  assetTypeStr: string
-  currencyTypeStr: string
-  isOpen: boolean
-  percentage: number
-}
-const data = ref<AssetData[]>([])
+const { data } = useQueryAssetsList({
+  userId: userInfo.value.userId
+})
 
-const setData = async () => {
-  try {
-    const res = await getAssetsList(userInfo.value.userId)
-    const totalAmount = res.reduce((acc, cur) => acc + cur.amount, 0)
-    data.value = res.map((a) => {
-      return {
-        ...a,
-        assetTypeStr: assetsType.value.find((t) => t.id === a.assetType)?.name || '',
-        currencyTypeStr: currencyType.value.find((t) => t.id === a.currencyType)?.symbol || '',
-        isOpen: false,
-        percentage: (a.amount / totalAmount) * 100 || 0
-      }
-    })
-  } catch (e) {
-    console.error(e)
-  }
+const collapses = ref([])
+
+const totalAmount = computed(() => {
+  return data.value.reduce((acc, cur) => acc + cur.amount, 0)
+})
+
+function getCurrencySymbol(type: string) {
+  const currency = currencyType.value.find((c) => c.id === type)
+  return currency?.symbol || ''
 }
+// function getAssetsTypeName(type: string) {
+//   const assets = assetsType.value.find((a) => a.id === type)
+//   return assets?.name || ''
+// }
 
 onMounted(async () => {
   try {
@@ -66,24 +59,24 @@ onMounted(async () => {
   } catch (e) {
     console.error(e)
   }
-  await setData()
 })
 </script>
 
 <template>
   <div class="flex flex-col gap-3">
-    <Collapsible v-for="a in data" :key="a.id" v-model:open="a.isOpen">
+    <Collapsible v-for="(a, idx) in data" :key="a.id" v-model:open="collapses[idx]">
       <CollapsibleTrigger>
+        <!-- <div>{{ getAssetsTypeName(a.assetsType) }}</div> -->
         <div class="mb-2 flex items-center justify-between">
           <div class="font-bold">{{ a.name }}</div>
-          <div>{{ a.currencyTypeStr }} {{ num(a.amount) }}</div>
+          <div>{{ getCurrencySymbol(a.currencyType) }} {{ num(a.amount) }}</div>
         </div>
-        <Progress :model-value="a.percentage" />
+        <Progress :model-value="(a.amount / totalAmount) * 100" />
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <div v-for="(i, key) in additionInfo" :key="key" class="flex justify-between">
-          <div>{{ i }}</div>
-          <div>{{ a[key] }}</div>
+        <div v-for="(val, key) in additionInfo" :key="key" class="flex justify-between">
+          <div v-text="val" />
+          <div v-text="a[key]" />
         </div>
       </CollapsibleContent>
     </Collapsible>

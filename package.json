@@ -20,6 +20,8 @@
   "dependencies": {
     "@line/liff": "^2.23.2",
     "@radix-icons/vue": "^1.0.0",
+    "@tanstack/vue-query": "^5.51.1",
+    "@tanstack/vue-query-devtools": "^5.51.1",
     "@vueuse/core": "^10.11.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

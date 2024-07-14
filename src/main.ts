@@ -1,3 +1,4 @@
+import { VueQueryPlugin } from '@tanstack/vue-query'
 import { createPinia } from 'pinia'
 import { createApp } from 'vue'
 import { VueFire, VueFireAuth } from 'vuefire'
@@ -17,5 +18,6 @@ app.use(VueFire, {
   firebaseApp,
   modules: [VueFireAuth()]
 })
+app.use(VueQueryPlugin)
 
 app.mount('#app')

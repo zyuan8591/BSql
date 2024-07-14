@@ -2,8 +2,8 @@ import liff from '@line/liff'
 
 import { useAuthStore } from '@/store/auth'
 
-export default function liffInit() {
-  liff
+export default async function liffInit() {
+  await liff
     .init({
       liffId: import.meta.env.VITE_APP_LIFF_ID,
       withLoginOnExternalBrowser: true // Enable automatic login process

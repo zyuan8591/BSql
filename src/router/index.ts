@@ -12,7 +12,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  liffInit()
+  await liffInit()
   next()
 })
 
