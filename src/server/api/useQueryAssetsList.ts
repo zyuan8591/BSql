@@ -35,6 +35,6 @@ export default function useQueryAssetsList(payload: QueryAssetsList) {
   return useQuery({
     queryKey: ['QUERY_ASSETS_LIST', userId],
     queryFn: () => getAssetsList(userId),
-    initialData: []
+    staleTime: 1000 * 60 * 30 // 30 mins
   })
 }

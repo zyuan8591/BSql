@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { PlusIcon } from '@radix-icons/vue'
 import { storeToRefs } from 'pinia'
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import { Button } from '@/components/ui/button'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
@@ -15,14 +15,11 @@ import {
   DrawerTrigger
 } from '@/components/ui/drawer'
 import { Progress } from '@/components/ui/progress'
-import getAssetsType, { type AssetType } from '@/server/api/getAssetsType'
-import getAssetsCurrency, { type Currency } from '@/server/api/getCurrencyType'
 import useQueryAssetsList from '@/server/api/useQueryAssetsList'
+import useQueryAssetsType from '@/server/api/useQueryAssetsType'
+import useQueryCurrencyType from '@/server/api/useQueryCurrencyType'
 import { useAuthStore } from '@/store/auth'
 import num from '@/utils/num'
-
-const assetsType = ref<AssetType[]>([])
-const currencyType = ref<Currency[]>([])
 
 const authStore = useAuthStore()
 const { userInfo } = storeToRefs(authStore)
@@ -35,38 +32,31 @@ const { data } = useQueryAssetsList({
   userId: userInfo.value.userId
 })
 
+const { data: assetsType } = useQueryAssetsType()
+const { data: currencyType } = useQueryCurrencyType()
+
 const collapses = ref([])
 
 const totalAmount = computed(() => {
-  return data.value.reduce((acc, cur) => acc + cur.amount, 0)
+  return data.value?.reduce((acc, cur) => acc + cur.amount, 0) || 0
 })
 
 function getCurrencySymbol(type: string) {
-  const currency = currencyType.value.find((c) => c.id === type)
+  const currency = currencyType.value?.find((c) => c.id === type)
   return currency?.symbol || ''
 }
-// function getAssetsTypeName(type: string) {
-//   const assets = assetsType.value.find((a) => a.id === type)
-//   return assets?.name || ''
-// }
 
-onMounted(async () => {
-  try {
-    const res = await getAssetsType()
-    assetsType.value = res.data
-    const res2 = await getAssetsCurrency()
-    currencyType.value = res2.data
-  } catch (e) {
-    console.error(e)
-  }
-})
+function getAssetsTypeName(type: string) {
+  const assets = assetsType.value?.find((a) => a.id === type)
+  return assets?.name || ''
+}
 </script>
 
 <template>
   <div class="flex flex-col gap-3">
     <Collapsible v-for="(a, idx) in data" :key="a.id" v-model:open="collapses[idx]">
       <CollapsibleTrigger>
-        <!-- <div>{{ getAssetsTypeName(a.assetsType) }}</div> -->
+        <div>{{ getAssetsTypeName(a.assetsType) }}</div>
         <div class="mb-2 flex items-center justify-between">
           <div class="font-bold">{{ a.name }}</div>
           <div>{{ getCurrencySymbol(a.currencyType) }} {{ num(a.amount) }}</div>
