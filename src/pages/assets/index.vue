@@ -3,7 +3,6 @@ import { PlusIcon } from '@radix-icons/vue'
 import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 
-import { Button } from '@/components/ui/button'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import {
   Drawer,
@@ -15,6 +14,7 @@ import {
   DrawerTrigger
 } from '@/components/ui/drawer'
 import { Progress } from '@/components/ui/progress'
+import Create from '@/pages/assets/Create.vue'
 import useQueryAssetsList from '@/server/api/useQueryAssetsList'
 import useQueryAssetsType from '@/server/api/useQueryAssetsType'
 import useQueryCurrencyType from '@/server/api/useQueryCurrencyType'
@@ -83,7 +83,7 @@ function getAssetsTypeName(type: string) {
           <DrawerDescription>$＿$</DrawerDescription>
         </DrawerHeader>
         <DrawerFooter>
-          <Button>送出</Button>
+          <Create />
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
