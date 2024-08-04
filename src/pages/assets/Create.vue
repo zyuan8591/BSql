@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { h } from 'vue'
+// import { h } from 'vue'
 import * as z from 'zod'
 
 import { AutoForm, AutoFormField } from '@/components/ui/auto-form'
 import { Button } from '@/components/ui/button'
-import { toast } from '@/components/ui/toast'
+// import { toast } from '@/components/ui/toast'
 
 enum Sports {
   Football = 'Football/Soccer',
@@ -15,22 +15,9 @@ enum Sports {
 }
 
 const schema = z.object({
-  username: z
-    .string({
-      required_error: 'Username is required.'
-    })
-    .min(2, {
-      message: 'Username must be at least 2 characters.'
-    }),
-
-  password: z
-    .string({
-      required_error: 'Password is required.'
-    })
-    .min(8, {
-      message: 'Password must be at least 8 characters.'
-    }),
-
+  name: z.string({
+    required_error: '請輸入名稱'
+  }),
   favouriteNumber: z.coerce
     .number({
       invalid_type_error: 'Favourite number must be a number.'
@@ -77,14 +64,16 @@ const schema = z.object({
 })
 
 function onSubmit(values: Record<string, any>) {
-  toast({
-    title: 'You submitted the following values:',
-    description: h(
-      'pre',
-      { class: 'mt-2 w-[340px] rounded-md bg-slate-950 p-4' },
-      h('code', { class: 'text-white' }, JSON.stringify(values, null, 2))
-    )
-  })
+  console.log(values)
+
+  // toast({
+  //   title: 'You submitted the following values:',
+  //   description: h(
+  //     'pre',
+  //     { class: 'mt-2 w-[340px] rounded-md bg-slate-950 p-4' },
+  //     h('code', { class: 'text-white' }, JSON.stringify(values, null, 2))
+  //   )
+  // })
 }
 </script>
 
@@ -93,13 +82,7 @@ function onSubmit(values: Record<string, any>) {
     class="w-2/3 space-y-6"
     :schema="schema"
     :field-config="{
-      password: {
-        label: 'Your secure password',
-        inputProps: {
-          type: 'password',
-          placeholder: '••••••••'
-        }
-      },
+      name: { label: '名稱' },
       favouriteNumber: {
         description: 'Your favourite number between 1 and 10.'
       },
