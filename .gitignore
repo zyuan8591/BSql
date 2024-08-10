@@ -30,3 +30,7 @@ coverage
 *.tsbuildinfo
 
 .env
+.env.prod
+
+*.pem
+*.tar.gz

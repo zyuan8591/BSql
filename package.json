@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
+    "build:prod": "vue-tsc && vite build --mode prod",
+    "deploy:prod": "bash deploy.prod.sh",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
