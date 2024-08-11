@@ -29,6 +29,7 @@
     "@vueuse/core": "^10.11.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dayjs": "^1.11.12",
     "firebase": "^10.12.2",
     "lucide-vue-next": "^0.416.0",
     "nes.css": "^2.3.0",

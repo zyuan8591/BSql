@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/vue-query'
 
 import useReadRTDB from '@/composables/useReadRTDB'
 
-interface AssetType {
+export interface AssetType {
   id: string
   name: string
 }
@@ -19,10 +19,10 @@ function getAssetsType() {
   })
 }
 
-export default function useQueryAssetsType() {
+export default function queryAssetsType() {
   return useQuery({
     queryKey: ['QUERY_ASSETS_TYPE'],
     queryFn: getAssetsType,
-    staleTime: 1000 * 60 * 60 * 24 // 24 hrs
+    initialData: []
   })
 }

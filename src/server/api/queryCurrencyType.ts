@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/vue-query'
 
 import useReadRTDB from '@/composables/useReadRTDB'
 
-interface Currency {
+export interface CurrencyType {
   id: string
   name: string
   symbol: string
@@ -10,8 +10,8 @@ interface Currency {
 }
 
 function getCurrencyType() {
-  return new Promise<Currency[]>((resolve, reject) => {
-    useReadRTDB<Currency[]>('setting/currency')
+  return new Promise<CurrencyType[]>((resolve, reject) => {
+    useReadRTDB<CurrencyType[]>('setting/currency')
       .then((res) => {
         resolve(res.data)
       })
@@ -21,10 +21,10 @@ function getCurrencyType() {
   })
 }
 
-export default function useQueryCurrencyType() {
+export default function queryCurrencyType() {
   return useQuery({
-    queryKey: ['QUERY_CURRENCY'],
-    queryFn: () => getCurrencyType(),
-    staleTime: 1000 * 60 * 60 * 24 // 24 hrs
+    queryKey: ['QUERY_CURRENCY_TYPE'],
+    queryFn: getCurrencyType,
+    initialData: []
   })
 }

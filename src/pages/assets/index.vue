@@ -7,7 +7,6 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import {
   Drawer,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
@@ -15,9 +14,9 @@ import {
 } from '@/components/ui/drawer'
 import { Progress } from '@/components/ui/progress'
 import Create from '@/pages/assets/Create.vue'
-import useQueryAssetsList from '@/server/api/useQueryAssetsList'
-import useQueryAssetsType from '@/server/api/useQueryAssetsType'
-import useQueryCurrencyType from '@/server/api/useQueryCurrencyType'
+import queryAssetsList from '@/server/api/queryAssetsList'
+import queryAssetsType from '@/server/api/queryAssetsType'
+import queryCurrencyType from '@/server/api/queryCurrencyType'
 import { useAuthStore } from '@/store/auth'
 import num from '@/utils/num'
 
@@ -28,12 +27,12 @@ const additionInfo = {
   createDate: '建立日期'
 }
 
-const { data } = useQueryAssetsList({
+const { data } = queryAssetsList({
   userId: userInfo.value.userId
 })
 
-const { data: assetsType } = useQueryAssetsType()
-const { data: currencyType } = useQueryCurrencyType()
+const { data: assetsType } = queryAssetsType()
+const { data: currencyType } = queryCurrencyType()
 
 const collapses = ref([])
 
@@ -80,10 +79,13 @@ function getAssetsTypeName(type: string) {
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>建立新帳戶資產</DrawerTitle>
-          <DrawerDescription>$＿$</DrawerDescription>
         </DrawerHeader>
         <DrawerFooter>
-          <Create />
+          <Create
+            :id="+data[data?.length - 1]?.id + 1"
+            :assetsType="assetsType"
+            :currencyType="currencyType"
+          />
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

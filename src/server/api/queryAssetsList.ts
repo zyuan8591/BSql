@@ -30,11 +30,11 @@ interface QueryAssetsList {
   userId: string
 }
 
-export default function useQueryAssetsList(payload: QueryAssetsList) {
+export default function queryAssetsList(payload: QueryAssetsList) {
   const { userId } = payload
   return useQuery({
     queryKey: ['QUERY_ASSETS_LIST', userId],
     queryFn: () => getAssetsList(userId),
-    staleTime: 1000 * 60 * 30 // 30 mins
+    initialData: []
   })
 }
