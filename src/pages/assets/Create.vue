@@ -16,6 +16,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const emits = defineEmits(['submit'])
 
 const authStore = useAuthStore()
 
@@ -51,7 +52,12 @@ async function onSubmit(values: Record<string, any>) {
     }
   }
 
-  await mutateAsync(payload)
+  try {
+    await mutateAsync(payload)
+    emits('submit')
+  } catch (error) {
+    console.error(error)
+  }
 }
 </script>
 

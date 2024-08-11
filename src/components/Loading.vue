@@ -1,10 +1,16 @@
 <script setup lang="ts">
-import { useIsFetching } from '@tanstack/vue-query'
+import { useIsFetching, useIsMutating } from '@tanstack/vue-query'
+import { computed } from 'vue'
 
 const isFetching = useIsFetching()
+const isMutating = useIsMutating()
+
+const isLoading = computed(() => {
+  return !!isFetching.value || !!isMutating.value
+})
 </script>
 <template>
-  <div v-if="isFetching" class="center fixed inset-0 z-50 bg-black/80">
+  <div v-if="isLoading" class="center fixed inset-0 z-50 bg-black/80">
     <span class="loader" />
   </div>
 </template>

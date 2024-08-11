@@ -23,11 +23,13 @@ import num from '@/utils/num'
 const authStore = useAuthStore()
 const { userInfo } = storeToRefs(authStore)
 
+const isCreating = ref(false)
+
 const additionInfo = {
   createDate: '建立日期'
 }
 
-const { data } = queryAssetsList({
+const { data, refetch } = queryAssetsList({
   userId: userInfo.value.userId
 })
 
@@ -48,6 +50,11 @@ function getCurrencySymbol(type: string) {
 function getAssetsTypeName(type: string) {
   const assets = assetsType.value?.find((a) => a.id === type)
   return assets?.name || ''
+}
+
+const createHandler = async () => {
+  await refetch()
+  isCreating.value = false
 }
 </script>
 
@@ -70,7 +77,7 @@ function getAssetsTypeName(type: string) {
       </CollapsibleContent>
     </Collapsible>
 
-    <Drawer>
+    <Drawer v-model:open="isCreating">
       <DrawerTrigger
         class="center fixed bottom-8 left-1/2 size-12 -translate-x-1/2 rounded-full border border-border"
       >
@@ -85,6 +92,7 @@ function getAssetsTypeName(type: string) {
             :id="+data[data?.length - 1]?.id + 1"
             :assetsType="assetsType"
             :currencyType="currencyType"
+            @submit="createHandler"
           />
         </DrawerFooter>
       </DrawerContent>
