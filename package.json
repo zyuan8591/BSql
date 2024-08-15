@@ -15,7 +15,7 @@
     "lint:script": "eslint \"./{src,modules}/**/*.{js,ts,vue}\" --max-warnings=0",
     "lint:script:fix": "pnpm lint:script --fix",
     "lint:style": "stylelint './src/**/*.{vue,scss}' --ignore-path .gitignore",
-    "lint:style:fix": "lint:style --fix",
+    "lint:style:fix": "stylelint './src/**/*.{vue,scss,html,cjs}' --fix",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
   },

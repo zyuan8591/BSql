@@ -35,34 +35,24 @@
   :root {
     --background: #22252a;
     --foreground: hsl(210, 40%, 98%);
-
     --muted: hsl(217.2, 32.6%, 17.5%);
     --muted-foreground: hsl(215, 20.2%, 65.1%);
-
     --popover: hsl(222.2, 84%, 4.9%);
     --popover-foreground: hsl(210, 40%, 98%);
-
     --card: #0d3c5b;
     --card-foreground: hsl(210, 40%, 98%);
     --card-hover: #0a76ba;
-
     --border: #89f0f8;
-    --input: #cccccc;
-
+    --input: #ccc;
     --primary: hsl(210, 40%, 98%);
     --primary-foreground: hsl(222.2, 47.4%, 11.2%);
-
     --secondary: hsl(217.2, 32.6%, 17.5%);
     --secondary-foreground: hsl(210, 40%, 98%);
-
     --accent: hsl(217.2, 32.6%, 17.5%);
     --accent-foreground: hsl(210, 40%, 98%);
-
     --destructive: rgb(211, 45, 38);
     --destructive-foreground: hsl(210, 40%, 98%);
-
     --ring: #036087;
-
     --radius: 0.5rem;
   }
 }
@@ -71,6 +61,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }

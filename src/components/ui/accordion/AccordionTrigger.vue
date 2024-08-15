@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
+import { ChevronDownIcon } from '@radix-icons/vue'
 import {
   AccordionHeader,
   AccordionTrigger,
   type AccordionTriggerProps,
 } from 'radix-vue'
-import { ChevronDownIcon } from '@radix-icons/vue'
+import { computed, type HTMLAttributes } from 'vue'
+
 import { cn } from '@/lib/utils'
 
 const props = defineProps<AccordionTriggerProps & { class?: HTMLAttributes['class'] }>()
@@ -31,7 +32,7 @@ const delegatedProps = computed(() => {
       <slot />
       <slot name="icon">
         <ChevronDownIcon
-          class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
+          class="size-4 shrink-0 text-muted-foreground transition-transform duration-200"
         />
       </slot>
     </AccordionTrigger>

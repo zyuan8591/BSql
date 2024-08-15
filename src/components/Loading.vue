@@ -17,6 +17,7 @@ const isLoading = computed(() => {
 <style lang="scss" scoped>
 .loader {
   @apply size-12 border-[5px] border-white border-b-[#e60012] rounded-full inline-block box-border;
+
   animation: rotation 1s linear infinite;
 }
 
@@ -24,6 +25,7 @@ const isLoading = computed(() => {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

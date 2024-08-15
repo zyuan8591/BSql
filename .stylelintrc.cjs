@@ -26,6 +26,9 @@ module.exports = {
     'scss/at-rule-no-unknown': null,
     'scss/no-global-function-names': null,
     'scss/comment-no-empty': null,
+    'font-family-name-quotes': 'always-unless-keyword',
+    'hue-degree-notation': 'number',
+    'custom-property-empty-line-before': 'never',
 
     // order
     'order/properties-order': [
