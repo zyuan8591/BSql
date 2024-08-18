@@ -22,3 +22,12 @@ script:
   - pnpm lint:script
   - pnpm lint:style
   - pnpm build:prod
+
+deploy:
+  provider: s3
+  access_key_id: $AccessKeyID
+  secret_access_key: $SecretAccessKey
+  bucket: 'acc.bsql.xyz'
+  skip_cleanup: true
+  region: 'ap-southeast-2'
+  local_dir: 'dist'
