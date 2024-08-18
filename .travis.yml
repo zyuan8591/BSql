@@ -25,8 +25,8 @@ script:
 
 deploy:
   provider: s3
-  access_key_id: $AccessKeyID
-  secret_access_key: $SecretAccessKey
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: 'acc.bsql.xyz'
   skip_cleanup: true
   region: 'ap-southeast-2'
