@@ -13,7 +13,7 @@ import {
   DrawerTrigger
 } from '@/components/ui/drawer'
 import { Progress } from '@/components/ui/progress'
-import Create from '@/pages/assets/Create.vue'
+import Create from '@/pages/asset/Create.vue'
 import queryAssetsList from '@/server/api/queryAssetsList'
 import queryAssetsType from '@/server/api/queryAssetsType'
 import queryCurrencyType from '@/server/api/queryCurrencyType'
