@@ -14,6 +14,15 @@ before_install:
   - corepack enable
   - corepack prepare pnpm@latest-9 --activate
   - pnpm config set store-dir ~/.pnpm-store
+  - echo "VITE_APP_FIREBASE_API_KEY=$VITE_APP_FIREBASE_API_KEY" > .env.prod
+  - echo "VITE_APP_FIREBASE_AUTH_DOMAIN=$VITE_APP_FIREBASE_AUTH_DOMAIN" > .env.prod
+  - echo "VITE_APP_FIREBASE_DATABASE_URL=$VITE_APP_FIREBASE_DATABASE_URL" > .env.prod
+  - echo "VITE_APP_FIREBASE_PROJECT_ID=$VITE_APP_FIREBASE_PROJECT_ID" > .env.prod
+  - echo "VITE_APP_FIREBASE_STORAGE_BUCKET=$VITE_APP_FIREBASE_STORAGE_BUCKET" > .env.prod
+  - echo "VITE_APP_FIREBASE_MESSAGING_SENDER_ID=$VITE_APP_FIREBASE_MESSAGING_SENDER_ID" > .env.prod
+  - echo "VITE_APP_FIREBASE_APP_ID=$VITE_APP_FIREBASE_APP_ID" > .env.prod
+  - echo "VITE_APP_FIREBASE_MEASUREMENT_I=$VITE_APP_FIREBASE_MEASUREMENT_I" > .env.prod
+  - echo "VITE_APP_LIFF_ID=$VITE_APP_LIFF_ID" > .env.prod
 
 install:
   - pnpm install
